@@ -1,0 +1,54 @@
+@use '../../../scss/vars.scss';
+
+.card {
+  max-width: 300px;
+  display: block;
+  padding: 20px;
+  background: vars.$light-secondary;
+  border-bottom: 2px solid vars.$light-tertiary;
+  box-shadow: vars.$box-shadow vars.$light-tertiary;
+  transition: 0.15s box-shadow;
+
+  &:hover {
+    box-shadow: vars.$box-shadow vars.$light-tertiary,
+      vars.$box-shadow vars.$dark-primary inset;
+  }
+}
+
+.img {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 8px;
+}
+
+.title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 15px;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 30px;
+    background: vars.$light-tertiary;
+    margin: 0 auto;
+    margin-top: 8px;
+  }
+}
+
+.about-item + .about-item {
+  margin-top: 5px;
+}
+
+.about-item {
+  display: flex;
+}
+
+.about-title {
+  margin-right: 10px;
+  font-weight: 500;
+}
