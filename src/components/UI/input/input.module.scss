@@ -1,26 +1,43 @@
 @use '../../../scss/vars.scss';
 
 .input {
-  padding: 5px 12px 5px 35px;
+  padding: 9px 12px 9px 35px;
   border: 2px solid;
-  max-width: 200px;
-  width: 100%;
+  width: 200px;
+  transition: 0.15s border-color;
 
   &:focus {
     padding-left: 12px;
+    outline: none;
   }
 }
 
 .input-light {
   border-color: vars.$light-tertiary;
-  box-shadow: 0px 0px 15px -5px vars.$light-tertiary;
+  box-shadow: vars.$box-shadow vars.$light-tertiary;
   background: vars.$light-secondary;
+
+  &::placeholder {
+    color: vars.$dark-primary;
+  }
+
+  &:focus {
+    border-color: vars.$dark-primary;
+  }
 }
 
 .input-dark {
   border-color: vars.$dark-tertiary;
-  box-shadow: 0px 0px 15px -5px vars.$dark-tertiary;
+  box-shadow: vars.$box-shadow vars.$dark-tertiary;
   background: vars.$dark-secondary;
+
+  &::placeholder {
+    color: vars.$light-primary;
+  }
+
+  &:focus {
+    border-color: vars.$light-primary;
+  }
 }
 
 .wrapper {

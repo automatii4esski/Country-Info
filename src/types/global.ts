@@ -5,6 +5,11 @@ export type GetAttributes<TElement extends keyof JSX.IntrinsicElements> =
 
 export type ThemeType = 'dark' | 'light';
 
+export interface SelectOptionType {
+  label: string;
+  value: string;
+}
+
 export type RootReducer = ReturnType<typeof rootReducer>;
 export type State = typeof store;
 export type AppDispatch = State['dispatch'];

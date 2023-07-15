@@ -1,0 +1,69 @@
+@use '../../../../scss/vars.scss';
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.select {
+  padding: 7px 12px;
+  border: 2px solid;
+  width: 200px;
+  transition: 0.15s border-color;
+  cursor: pointer;
+
+  &:focus {
+    background: #000;
+  }
+}
+
+.menu {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.option {
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: 0.15s background;
+  border-bottom: 2px solid;
+}
+
+.option-light {
+  border-bottom-color: vars.$light-tertiary;
+  background: vars.$light-secondary;
+  &:hover {
+    background: vars.$light-tertiary;
+  }
+}
+
+.option-dark {
+  border-bottom-color: vars.$dark-tertiary;
+  background: vars.$dark-secondary;
+  &:hover {
+    background: vars.$dark-tertiary;
+  }
+}
+
+.select-light {
+  border-color: vars.$light-tertiary;
+  box-shadow: vars.$box-shadow vars.$light-tertiary;
+  background: vars.$light-secondary;
+
+  &.focused {
+    border-color: vars.$dark-primary;
+  }
+}
+
+.select-dark {
+  border-color: vars.$dark-tertiary;
+  box-shadow: vars.$box-shadow vars.$dark-tertiary;
+  background: vars.$dark-secondary;
+
+  &.focused {
+    border-color: vars.$light-primary;
+  }
+}
