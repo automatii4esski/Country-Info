@@ -2,16 +2,57 @@
 
 .card {
   max-width: 300px;
+  width: 100%;
+  margin-bottom: 20px;
   display: block;
-  padding: 20px;
-  background: vars.$light-secondary;
-  border-bottom: 2px solid vars.$light-tertiary;
-  box-shadow: vars.$box-shadow vars.$light-tertiary;
-  transition: 0.15s box-shadow;
+
+  position: relative;
+  transition: 0.15s transform;
+
+  &::before {
+    content: '';
+    transition: 0.15s box-shadow;
+  }
 
   &:hover {
-    box-shadow: vars.$box-shadow vars.$light-tertiary,
-      vars.$box-shadow vars.$dark-primary inset;
+    transform: scale(0.97);
+  }
+
+  &:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+}
+
+.light {
+  background: vars.$light-secondary;
+  box-shadow: vars.$box-shadow vars.$light-tertiary;
+
+  &:hover::before {
+    box-shadow: vars.$box-shadow vars.$dark-primary inset;
+  }
+
+  & .info {
+    border-bottom: 2px solid vars.$light-tertiary;
+    border-top: 2px solid vars.$light-tertiary;
+  }
+}
+
+.dark {
+  background: vars.$dark-secondary;
+  box-shadow: vars.$box-shadow vars.$dark-tertiary;
+
+  &:hover::before {
+    box-shadow: vars.$box-shadow vars.$light-primary inset;
+  }
+
+  & .info {
+    border-bottom: 2px solid vars.$dark-tertiary;
+    border-top: 2px solid vars.$dark-tertiary;
   }
 }
 
@@ -20,7 +61,10 @@
   width: 100%;
   object-fit: cover;
   object-position: center;
-  margin-bottom: 8px;
+}
+
+.info {
+  padding: 20px;
 }
 
 .title {
