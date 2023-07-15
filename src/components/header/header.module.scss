@@ -2,16 +2,19 @@
 
 .header {
   border-bottom: 2px solid;
+  margin-bottom: 50px;
 }
 
 .light {
   background: vars.$light-secondary;
   border-bottom-color: vars.$light-tertiary;
+  box-shadow: 0px 0px 15px 0px vars.$light-tertiary;
 }
 
 .dark {
   background: vars.$dark-secondary;
   border-bottom-color: vars.$dark-tertiary;
+  box-shadow: 0px 0px 25px 0px vars.$dark-tertiary;
 }
 
 .button {

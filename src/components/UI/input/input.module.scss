@@ -1,0 +1,52 @@
+@use '../../../scss/vars.scss';
+
+.input {
+  padding: 5px 12px 5px 35px;
+  border: 2px solid;
+  max-width: 200px;
+  width: 100%;
+
+  &:focus {
+    padding-left: 12px;
+  }
+}
+
+.input-light {
+  border-color: vars.$light-tertiary;
+  box-shadow: 0px 0px 15px -5px vars.$light-tertiary;
+  background: vars.$light-secondary;
+}
+
+.input-dark {
+  border-color: vars.$dark-tertiary;
+  box-shadow: 0px 0px 15px -5px vars.$dark-tertiary;
+  background: vars.$dark-secondary;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.15s opacity;
+}
+
+.icon-light path {
+  fill: vars.$dark-primary;
+}
+.icon-dark path {
+  fill: vars.$light-primary;
+}
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+}

@@ -4,7 +4,7 @@ import logo from '../../assets/img/icons/logo.svg';
 import { ReactComponent as DarkIcon } from '../../assets/img/icons/dark-theme.svg';
 import { ReactComponent as LightIcon } from '../../assets/img/icons/light-theme.svg';
 import styles from './header.module.scss';
-import Container from '../../components/common/container/Container';
+import Container from '../common/container/Container';
 import { GetAttributes } from '../../types/global';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
@@ -12,14 +12,14 @@ import {
   switchTheme,
 } from '../../store/features/theme/themeSlice';
 
+const themeIcon = {
+  light: <LightIcon className={`${styles.icon} ${styles['light-icon']}`} />,
+  dark: <DarkIcon className={`${styles.icon} ${styles['dark-icon']}`} />,
+};
+
 const Header: FC<GetAttributes<'header'>> = ({ className, ...props }) => {
   const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(selectTheme);
-
-  const themeIcon = {
-    light: <LightIcon className={`${styles.icon} ${styles['light-icon']}`} />,
-    dark: <DarkIcon className={`${styles.icon} ${styles['dark-icon']}`} />,
-  };
 
   const onButtonClick = function () {
     dispatch(switchTheme());

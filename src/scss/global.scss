@@ -8,11 +8,11 @@ button {
 }
 
 .body-light {
-  color: $font-light;
+  color: $font-dark;
   background: $light-primary;
 }
 
 .body-dark {
-  color: $font-dark;
+  color: $font-light;
   background: $dark-primary;
 }
