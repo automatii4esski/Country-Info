@@ -1,0 +1,57 @@
+@use '../../scss/vars.scss';
+
+.header {
+  border-bottom: 2px solid;
+}
+
+.light {
+  background: vars.$light-secondary;
+  border-bottom-color: vars.$light-tertiary;
+}
+
+.dark {
+  background: vars.$dark-secondary;
+  border-bottom-color: vars.$dark-tertiary;
+}
+
+.button {
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s background;
+
+  &:hover {
+    background: #d6d6d6;
+  }
+}
+
+.logo {
+  height: 60px;
+  width: 60px;
+}
+
+.light-icon {
+  fill: vars.$dark-primary;
+  margin-right: 2px;
+}
+
+.dark-icon path {
+  fill: vars.$light-primary;
+}
+
+.inner {
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}

@@ -1,1 +1,18 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
 
+button {
+  cursor: pointer;
+}
+
+.body-light {
+  color: $font-light;
+  background: $light-primary;
+}
+
+.body-dark {
+  color: $font-dark;
+  background: $dark-primary;
+}
