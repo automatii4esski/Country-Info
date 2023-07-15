@@ -26,7 +26,7 @@
   transition: 0.15s background;
 
   &:hover {
-    background: #d6d6d6;
+    background: #808080;
   }
 }
 
@@ -37,7 +37,6 @@
 
 .light-icon {
   fill: vars.$dark-primary;
-  margin-right: 2px;
 }
 
 .dark-icon path {

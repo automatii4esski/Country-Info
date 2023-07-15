@@ -6,16 +6,28 @@ import { ReactComponent as LightIcon } from '../../assets/img/icons/light-theme.
 import styles from './header.module.scss';
 import Container from '../../components/common/container/Container';
 import { GetAttributes } from '../../types/global';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import {
+  selectTheme,
+  switchTheme,
+} from '../../store/features/theme/themeSlice';
 
 const Header: FC<GetAttributes<'header'>> = ({ className, ...props }) => {
+  const dispatch = useAppDispatch();
+  const currentTheme = useAppSelector(selectTheme);
+
   const themeIcon = {
     light: <LightIcon className={`${styles.icon} ${styles['light-icon']}`} />,
     dark: <DarkIcon className={`${styles.icon} ${styles['dark-icon']}`} />,
   };
 
+  const onButtonClick = function () {
+    dispatch(switchTheme());
+  };
+
   return (
     <header
-      className={`${styles.header} ${styles.light} ${className}`}
+      className={`${styles.header} ${styles[currentTheme]} ${className}`}
       {...props}
     >
       <Container>
@@ -23,7 +35,9 @@ const Header: FC<GetAttributes<'header'>> = ({ className, ...props }) => {
           <Link to="/">
             <img className={styles.logo} src={logo} alt="logo" />
           </Link>
-          <button className={styles.button}>{themeIcon['light']}</button>
+          <button className={styles.button} onClick={onButtonClick}>
+            {themeIcon[currentTheme]}
+          </button>
         </div>
       </Container>
     </header>
