@@ -4,6 +4,7 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 import { Country } from '../../../types/country';
+import { RootReducer } from '../../../types/global';
 
 const countriesAdapter = createEntityAdapter<Country>({
   selectId: (model) => model.name.common,
@@ -36,4 +37,7 @@ const countrySlice = createSlice({
 
 export const { reducer: countryReducer } = countrySlice;
 export const { setCountries } = countrySlice.actions;
-export const { selectAll } = countriesAdapter.getSelectors();
+const { selectAll } = countriesAdapter.getSelectors();
+
+export const selectAllCountries = (state: RootReducer) =>
+  selectAll(state.country);

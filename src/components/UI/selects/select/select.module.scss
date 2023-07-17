@@ -12,8 +12,8 @@
 .select {
   padding: 7px 12px;
   border: 2px solid;
-  width: 200px;
   transition: 0.15s border-color;
+  min-width: 200px;
   cursor: pointer;
 
   &:focus {
@@ -23,6 +23,25 @@
 
 .menu {
   animation: fadeIn 0.2s ease-in-out;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  &::after {
+    content: '';
+    height: 20px;
+    margin: 0 8px;
+    width: 2px;
+    display: inline-block;
+  }
+}
+
+.value-light::after {
+  background: vars.$light-tertiary;
+}
+.value-dark::after {
+  background: vars.$dark-tertiary;
 }
 
 .option {

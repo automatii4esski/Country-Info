@@ -3,20 +3,26 @@ import styles from './countries.module.scss';
 import CountryCard from '../countryCard/CountryCard';
 import {
   fetchCountries,
-  selectAll,
+  selectAllCountries,
 } from '../../../store/features/countries/countrySlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useFilterCountries } from '../../../hooks/countries';
+import { selectAllCountryFilters } from '../../../store/features/countries/countryFilterSlice';
 
 const Countries: FC = () => {
   const dispatch = useAppDispatch();
-  const countries = useAppSelector((state) => selectAll(state.country));
+  const { regions, query } = useAppSelector(selectAllCountryFilters);
+  console.log(1);
+
+  const countries = useAppSelector(selectAllCountries);
+  const filteredCountries = useFilterCountries(countries, query, regions);
   useEffect(() => {
     dispatch(fetchCountries());
   }, []);
 
   return (
     <div className={styles.countries}>
-      {countries.map((country, i) => (
+      {filteredCountries.map((country, i) => (
         <CountryCard key={i} countryProps={country} />
       ))}
     </div>
