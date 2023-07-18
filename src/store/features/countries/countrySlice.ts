@@ -49,3 +49,8 @@ const { selectAll } = countriesAdapter.getSelectors();
 
 export const selectAllCountries = (state: RootReducer) =>
   selectAll(state.country);
+
+export const selectCountryStates = (state: RootReducer): [string, boolean] => [
+  state.country.error,
+  state.country.isLoading,
+];

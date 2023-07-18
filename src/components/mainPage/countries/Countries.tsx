@@ -4,10 +4,12 @@ import CountryCard from '../countryCard/CountryCard';
 import {
   fetchCountries,
   selectAllCountries,
+  selectCountryStates,
 } from '../../../store/features/countries/countrySlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { useFilterCountries } from '../../../hooks/countries';
 import { selectAllCountryFilters } from '../../../store/features/countries/countryFilterSlice';
+import Loader from '../../UI/loader/loader/Loader';
 
 const Countries: FC = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +18,7 @@ const Countries: FC = () => {
   );
 
   const countries = useAppSelector(selectAllCountries);
+  const [error, isLoading] = useAppSelector(selectCountryStates);
   const filteredCountries = useFilterCountries(
     countries,
     query,
@@ -28,9 +31,10 @@ const Countries: FC = () => {
 
   return (
     <div className={styles.countries}>
-      {filteredCountries.map((country, i) => (
+      {true && <Loader />}
+      {/* {filteredCountries.map((country, i) => (
         <CountryCard key={i} countryProps={country} />
-      ))}
+      ))} */}
     </div>
   );
 };
