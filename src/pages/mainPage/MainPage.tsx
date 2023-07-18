@@ -7,7 +7,7 @@ import Countries from '../../components/mainPage/countries/Countries';
 const MainPage: FC = () => {
   return (
     <Container>
-      <div>
+      <div className={styles.main}>
         <Filter />
         <Countries />
       </div>

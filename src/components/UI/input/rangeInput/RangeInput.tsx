@@ -1,4 +1,4 @@
-import { FC, useRef, useState, ChangeEvent } from 'react';
+import { FC, useRef, useState, ChangeEvent, FocusEvent } from 'react';
 import styles from './rangeInput.module.scss';
 import { useAppSelector } from '../../../../hooks/redux';
 import { selectTheme } from '../../../../store/features/theme/themeSlice';
@@ -11,34 +11,48 @@ const RangeInput: FC<RangeInputProps> = ({
   min,
   maxDefault = max,
   minDefault = min,
+  onSetValues: onSetValuesCallback,
   ...props
 }) => {
-  const firstRef = useRef<HTMLInputElement>(null);
-  const secondRef = useRef<HTMLInputElement>(null);
+  const [maxValue, setMaxValue] = useState<number>(maxDefault);
+  const [minValue, setMinValue] = useState<number>(minDefault);
   const currentTheme = useAppSelector(selectTheme);
 
-  const getLeft = (value = secondRef.current!.value) =>
-    (parseFloat(value) / max) * 100;
+  const getBetweenLineLeftPosition = (value: number) => (value / max) * 100;
 
-  const getRight = (value = firstRef.current!.value) =>
-    ((max - parseFloat(value)) / max) * 100;
+  const getBetweenLineRightPosition = (value: number) =>
+    ((max - value) / max) * 100;
 
-  const [left, setLeft] = useState<number>(getLeft(minDefault + ''));
-  const [right, setRight] = useState<number>(getRight(maxDefault + ''));
+  const [leftPos, setLeftPos] = useState<number>(
+    getBetweenLineLeftPosition(minValue)
+  );
+  const [rightPos, setRightPos] = useState<number>(
+    getBetweenLineRightPosition(maxValue)
+  );
 
-  const onLeftRangeChange = function (e: ChangeEvent<HTMLInputElement>) {
-    if (+e.target.value >= +firstRef.current!.value) {
-      e.target.value = firstRef.current!.value;
+  const onMinRangeChange = function (e: ChangeEvent<HTMLInputElement>) {
+    const value = +e.target.value;
+    if (value >= maxValue) {
+      setMinValue(maxValue);
+      setLeftPos(getBetweenLineLeftPosition(maxValue));
+    } else {
+      setMinValue(value);
+      setLeftPos(getBetweenLineLeftPosition(value));
     }
-    setLeft(getLeft());
   };
 
-  const onRightRangeChange = function (e: ChangeEvent<HTMLInputElement>) {
-    if (+e.target.value <= +secondRef.current!.value) {
-      e.target.value = secondRef.current!.value;
+  const onMaxRangeChange = function (e: ChangeEvent<HTMLInputElement>) {
+    const value = +e.target.value;
+    if (value <= minValue) {
+      setMaxValue(minValue);
+      setRightPos(getBetweenLineRightPosition(minValue));
+    } else {
+      setMaxValue(value);
+      setRightPos(getBetweenLineRightPosition(value));
     }
-    setRight(getRight());
   };
+
+  const setValues = () => onSetValuesCallback(minValue, maxValue);
 
   return (
     <div className={`${styles.wrapper} ${className}`} {...props}>
@@ -47,26 +61,26 @@ const RangeInput: FC<RangeInputProps> = ({
         <div
           className={styles.between}
           style={{
-            left: `${left}%`,
-            right: `${right}%`,
+            left: `${leftPos}%`,
+            right: `${rightPos}%`,
           }}
         ></div>
 
         <input
-          ref={firstRef}
+          onChange={onMaxRangeChange}
+          onClick={setValues}
+          value={maxValue}
           className={styles['range-input']}
-          onChange={onRightRangeChange}
           type="range"
           min={min}
-          defaultValue={maxDefault}
           max={max}
         />
         <input
-          ref={secondRef}
-          onChange={onLeftRangeChange}
+          onChange={onMinRangeChange}
+          onClick={setValues}
+          value={minValue}
           className={styles['range-input']}
           type="range"
-          defaultValue={minDefault}
           min={min}
           max={max}
         />
@@ -75,8 +89,9 @@ const RangeInput: FC<RangeInputProps> = ({
         <div className={styles['input-wrapper']}>
           <h4 className={styles['input-title']}>Min</h4>
           <Input
-            defaultValue={minDefault}
-            value={secondRef.current?.value}
+            onChange={onMinRangeChange}
+            onBlur={setValues}
+            value={minValue}
             max={max}
             min={min}
             className={styles.input}
@@ -86,10 +101,11 @@ const RangeInput: FC<RangeInputProps> = ({
         <div className={styles['input-wrapper']}>
           <h4 className={styles['input-title']}>Max</h4>
           <Input
-            defaultValue={maxDefault}
+            onChange={onMaxRangeChange}
+            onBlur={setValues}
+            value={maxValue}
             max={max}
             min={min}
-            value={firstRef.current?.value}
             className={styles.input}
             type="number"
           />

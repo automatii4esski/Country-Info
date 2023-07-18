@@ -37,7 +37,7 @@ const Filter: FC = () => {
         onChange={onSearchChange}
         placeholder="Search for a country"
       />
-      <RangeInput max={8000000000} min={0} />
+      <RangeInput onSetValues={(min, max) => {}} max={8000000000} min={0} />
       <Select
         placeholder="Select the region"
         isMulti
