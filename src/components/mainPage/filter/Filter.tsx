@@ -4,6 +4,7 @@ import Select from '../../UI/selects/select/Select';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   selectAllCountryFilters,
+  setPopulation,
   setQuery,
   setRegions,
 } from '../../../store/features/countries/countryFilterSlice';
@@ -14,7 +15,9 @@ import RangeInput from '../../UI/input/rangeInput/RangeInput';
 import InputSearch from '../../UI/input/inputSearch/InputSearch';
 
 const Filter: FC = () => {
-  const { regions } = useAppSelector(selectAllCountryFilters);
+  const { regions, query, population } = useAppSelector(
+    selectAllCountryFilters
+  );
   const dispatch = useAppDispatch();
   let prevTimeout: NodeJS.Timeout;
 
@@ -23,6 +26,17 @@ const Filter: FC = () => {
     prevTimeout = setTimeout(() => {
       dispatch(setQuery(e.target.value));
     }, 700);
+  };
+
+  const onPopulationSet = function (min: number, max: number) {
+    console.log('dis');
+
+    dispatch(
+      setPopulation({
+        min,
+        max,
+      })
+    );
   };
 
   const onRegionChange = function (
@@ -35,9 +49,17 @@ const Filter: FC = () => {
     <div className={styles.filter}>
       <InputSearch
         onChange={onSearchChange}
+        defaultValue={query}
         placeholder="Search for a country"
       />
-      <RangeInput onSetValues={(min, max) => {}} max={8000000000} min={0} />
+      <RangeInput
+        onSetValues={onPopulationSet}
+        title="Population"
+        minLimit={0}
+        maxLimit={1500000000}
+        max={population.max}
+        min={population.min}
+      />
       <Select
         placeholder="Select the region"
         isMulti

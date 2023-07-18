@@ -2,25 +2,58 @@ import { useMemo } from 'react';
 import { Country } from '../types/country';
 import { Regions } from '../types/global';
 
-export const useFilterCountries = function (
+export const useFilterCountriesByQuery = (
   countries: Country[],
-  query: string,
-  regions: Regions[]
-) {
-  const filterByQueryCountries = useMemo(() => {
+  query: string
+) =>
+  useMemo(() => {
     return countries.filter((country) =>
       country.name.toLowerCase().includes(query.toLowerCase())
     );
   }, [query, countries]);
 
-  const filterByQueryAndRegionsCountries = useMemo(() => {
+export const useFilterCountriesByRegions = (
+  countries: Country[],
+  regions: Regions[]
+) =>
+  useMemo(() => {
     if (regions.length > 0) {
-      return filterByQueryCountries.filter((country) =>
+      return countries.filter((country) =>
         regions.some((reg) => country.region.toLowerCase() === reg)
       );
     }
-    return filterByQueryCountries;
-  }, [regions, filterByQueryCountries]);
+    return countries;
+  }, [regions, countries]);
 
-  return filterByQueryAndRegionsCountries;
+export const useFilterCountriesByPopulation = (
+  countries: Country[],
+  populationValues: { min: number; max: number }
+) =>
+  useMemo(
+    () =>
+      countries.filter(
+        ({ population }) =>
+          population >= populationValues.min &&
+          population <= populationValues.max
+      ),
+    [countries, populationValues]
+  );
+
+export const useFilterCountries = function (
+  countries: Country[],
+  query: string,
+  regions: Regions[],
+  population: { min: number; max: number }
+) {
+  const filteredByQuery = useFilterCountriesByQuery(countries, query);
+  const filteredByQueryAndRegions = useFilterCountriesByRegions(
+    filteredByQuery,
+    regions
+  );
+  const filteredByQueryRegionsAndPopulation = useFilterCountriesByPopulation(
+    filteredByQueryAndRegions,
+    population
+  );
+
+  return filteredByQueryRegionsAndPopulation;
 };

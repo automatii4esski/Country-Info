@@ -1,4 +1,4 @@
-import { FC, useRef, useState, ChangeEvent, FocusEvent } from 'react';
+import { FC, useState, ChangeEvent } from 'react';
 import styles from './rangeInput.module.scss';
 import { useAppSelector } from '../../../../hooks/redux';
 import { selectTheme } from '../../../../store/features/theme/themeSlice';
@@ -9,19 +9,21 @@ const RangeInput: FC<RangeInputProps> = ({
   className,
   max,
   min,
-  maxDefault = max,
-  minDefault = min,
+  minLimit,
+  maxLimit,
+  title,
   onSetValues: onSetValuesCallback,
   ...props
 }) => {
-  const [maxValue, setMaxValue] = useState<number>(maxDefault);
-  const [minValue, setMinValue] = useState<number>(minDefault);
+  const [maxValue, setMaxValue] = useState<number>(max);
+  const [minValue, setMinValue] = useState<number>(min);
   const currentTheme = useAppSelector(selectTheme);
 
-  const getBetweenLineLeftPosition = (value: number) => (value / max) * 100;
+  const getBetweenLineLeftPosition = (value: number) =>
+    (value / maxLimit) * 100;
 
   const getBetweenLineRightPosition = (value: number) =>
-    ((max - value) / max) * 100;
+    ((maxLimit - value) / maxLimit) * 100;
 
   const [leftPos, setLeftPos] = useState<number>(
     getBetweenLineLeftPosition(minValue)
@@ -56,7 +58,7 @@ const RangeInput: FC<RangeInputProps> = ({
 
   return (
     <div className={`${styles.wrapper} ${className}`} {...props}>
-      <h3 className={styles.title}>Population</h3>
+      <h3 className={styles.title}>{title}</h3>
       <div className={`${styles.range} ${styles[currentTheme]}`}>
         <div
           className={styles.between}
@@ -72,8 +74,8 @@ const RangeInput: FC<RangeInputProps> = ({
           value={maxValue}
           className={styles['range-input']}
           type="range"
-          min={min}
-          max={max}
+          min={minLimit}
+          max={maxLimit}
         />
         <input
           onChange={onMinRangeChange}
@@ -81,8 +83,8 @@ const RangeInput: FC<RangeInputProps> = ({
           value={minValue}
           className={styles['range-input']}
           type="range"
-          min={min}
-          max={max}
+          min={minLimit}
+          max={maxLimit}
         />
       </div>
       <div className={styles.inputs}>
@@ -92,8 +94,8 @@ const RangeInput: FC<RangeInputProps> = ({
             onChange={onMinRangeChange}
             onBlur={setValues}
             value={minValue}
-            max={max}
-            min={min}
+            max={maxLimit}
+            min={minLimit}
             className={styles.input}
             type="number"
           />
@@ -104,8 +106,8 @@ const RangeInput: FC<RangeInputProps> = ({
             onChange={onMaxRangeChange}
             onBlur={setValues}
             value={maxValue}
-            max={max}
-            min={min}
+            max={maxLimit}
+            min={minLimit}
             className={styles.input}
             type="number"
           />

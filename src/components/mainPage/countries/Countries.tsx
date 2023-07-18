@@ -11,10 +11,17 @@ import { selectAllCountryFilters } from '../../../store/features/countries/count
 
 const Countries: FC = () => {
   const dispatch = useAppDispatch();
-  const { regions, query } = useAppSelector(selectAllCountryFilters);
+  const { regions, query, population } = useAppSelector(
+    selectAllCountryFilters
+  );
 
   const countries = useAppSelector(selectAllCountries);
-  const filteredCountries = useFilterCountries(countries, query, regions);
+  const filteredCountries = useFilterCountries(
+    countries,
+    query,
+    regions,
+    population
+  );
   useEffect(() => {
     dispatch(fetchCountries());
   }, []);

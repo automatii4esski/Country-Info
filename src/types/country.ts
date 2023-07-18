@@ -16,4 +16,8 @@ export interface CountryCardProps extends Omit<LinkProps, 'to'> {
 export interface CountryFilter {
   query: string;
   regions: Regions[];
+  population: {
+    min: number;
+    max: number;
+  };
 }

@@ -5,6 +5,10 @@ import { RootReducer } from '../../../types/global';
 const initialState: CountryFilter = {
   query: '',
   regions: [],
+  population: {
+    min: 0,
+    max: 1500000000,
+  },
 };
 
 const countryFilterSlice = createSlice({
@@ -19,11 +23,19 @@ const countryFilterSlice = createSlice({
       state.regions = action.payload;
       return state;
     },
+    setPopulation(state, { payload }) {
+      state.population = {
+        min: payload.min,
+        max: payload.max,
+      };
+      return state;
+    },
   },
 });
 
 export const { reducer: countryFilterReducer } = countryFilterSlice;
-export const { setQuery, setRegions } = countryFilterSlice.actions;
+export const { setQuery, setRegions, setPopulation } =
+  countryFilterSlice.actions;
 
 export const selectAllCountryFilters = (state: RootReducer) =>
   state.countryFilter;
