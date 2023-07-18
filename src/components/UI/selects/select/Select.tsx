@@ -27,9 +27,12 @@ const Select = <
         option: () => `${styles[`option-${currentTheme}`]} ${styles.option}`,
         menu: () => styles.menu,
         multiValue: () => `${styles[`value-${currentTheme}`]} ${styles.value}`,
+        indicatorsContainer: () => styles.button,
+        multiValueRemove: () => styles.button,
       }}
       unstyled
       isClearable
+      isSearchable={false}
     />
   );
 };

@@ -12,7 +12,6 @@ import { selectAllCountryFilters } from '../../../store/features/countries/count
 const Countries: FC = () => {
   const dispatch = useAppDispatch();
   const { regions, query } = useAppSelector(selectAllCountryFilters);
-  console.log(1);
 
   const countries = useAppSelector(selectAllCountries);
   const filteredCountries = useFilterCountries(countries, query, regions);

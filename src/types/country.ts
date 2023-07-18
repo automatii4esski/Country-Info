@@ -2,15 +2,10 @@ import { LinkProps } from 'react-router-dom';
 import { GetAttributes, Regions } from './global';
 
 export interface Country {
-  flags: {
-    svg: string;
-    png: string;
-  };
+  flag: string;
   population: number;
   capital: string;
-  name: {
-    common: string;
-  };
+  name: string;
   region: string;
 }
 

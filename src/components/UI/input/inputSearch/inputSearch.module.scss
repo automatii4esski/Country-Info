@@ -1,0 +1,37 @@
+@use '../../../../scss/vars.scss';
+
+.input {
+  padding-left: 35px;
+
+  &:focus {
+    padding-left: 12px;
+  }
+}
+
+.wrapper {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.15s opacity;
+}
+
+.icon-light path {
+  fill: vars.$dark-primary;
+}
+.icon-dark path {
+  fill: vars.$light-primary;
+}
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
+}

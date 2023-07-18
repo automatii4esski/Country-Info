@@ -14,11 +14,14 @@
   border: 2px solid;
   transition: 0.15s border-color;
   min-width: 200px;
-  cursor: pointer;
 
   &:focus {
     background: #000;
   }
+}
+
+.button {
+  cursor: pointer;
 }
 
 .menu {
@@ -46,7 +49,7 @@
 
 .option {
   padding: 7px 12px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: 0.15s background;
   border-bottom: 2px solid;
 }

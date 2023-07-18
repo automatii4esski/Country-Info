@@ -1,13 +1,12 @@
-@use '../../../scss/vars.scss';
+@use '../../../../scss/vars.scss';
 
 .input {
-  padding: 9px 12px 9px 35px;
+  padding: 9px 12px 9px 12px;
   border: 2px solid;
   width: 200px;
   transition: 0.15s border-color;
 
   &:focus {
-    padding-left: 12px;
     outline: none;
   }
 }
@@ -38,32 +37,4 @@
   &:focus {
     border-color: vars.$light-primary;
   }
-}
-
-.wrapper {
-  position: relative;
-}
-
-.icon {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  left: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: 0.15s opacity;
-}
-
-.icon-light path {
-  fill: vars.$dark-primary;
-}
-.icon-dark path {
-  fill: vars.$light-primary;
-}
-.show {
-  opacity: 1;
-}
-
-.hide {
-  opacity: 0;
 }

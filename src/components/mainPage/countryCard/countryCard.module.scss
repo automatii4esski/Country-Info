@@ -40,6 +40,10 @@
     border-bottom: 2px solid vars.$light-tertiary;
     border-top: 2px solid vars.$light-tertiary;
   }
+
+  & .title::after {
+    background: vars.$light-tertiary;
+  }
 }
 
 .dark {
@@ -53,6 +57,10 @@
   & .info {
     border-bottom: 2px solid vars.$dark-tertiary;
     border-top: 2px solid vars.$dark-tertiary;
+  }
+
+  & .title::after {
+    background: vars.$dark-tertiary;
   }
 }
 
@@ -78,7 +86,6 @@
     display: block;
     height: 2px;
     width: 30px;
-    background: vars.$light-tertiary;
     margin: 0 auto;
     margin-top: 8px;
   }

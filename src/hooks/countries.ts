@@ -9,10 +9,9 @@ export const useFilterCountries = function (
 ) {
   const filterByQueryCountries = useMemo(() => {
     return countries.filter((country) =>
-      country.name.common.toLowerCase().includes(query.toLowerCase())
+      country.name.toLowerCase().includes(query.toLowerCase())
     );
   }, [query, countries]);
-  console.log(filterByQueryCountries);
 
   const filterByQueryAndRegionsCountries = useMemo(() => {
     if (regions.length > 0) {

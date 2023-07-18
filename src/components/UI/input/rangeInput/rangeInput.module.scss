@@ -1,0 +1,88 @@
+@use '../../../../scss/vars.scss';
+
+.inputs {
+  display: flex;
+
+  & .input {
+    padding: 5px;
+    width: 150px;
+  }
+}
+
+.range {
+  width: 200px;
+  position: relative;
+  height: 2px;
+  margin: 10px auto 30px;
+  z-index: 1;
+}
+
+.title {
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.input-wrapper + .input-wrapper {
+  margin-left: 10px;
+}
+
+.input-title {
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.light {
+  background: vars.$dark-primary;
+}
+.dark {
+  background: vars.$light-primary;
+}
+
+.range-input {
+  position: absolute;
+  appearance: none;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 1;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    border: 1px solid;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+}
+
+.light .range-input::-webkit-slider-thumb {
+  border-color: vars.$dark-primary;
+  background: vars.$light-tertiary;
+}
+
+.dark .range-input::-webkit-slider-thumb {
+  border-color: vars.$light-primary;
+  background: vars.$dark-tertiary;
+}
+
+.between {
+  position: absolute;
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.light .between {
+  background: vars.$light-tertiary;
+}
+
+.dark .between {
+  background: vars.$dark-tertiary;
+}

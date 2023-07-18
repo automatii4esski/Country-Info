@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, SyntheticEvent } from 'react';
 import styles from './countryCard.module.scss';
 import { Link } from 'react-router-dom';
 import { CountryCardProps } from '../../../types/country';
@@ -11,29 +11,37 @@ const CountryCard: FC<CountryCardProps> = ({
   ...props
 }) => {
   const currentTheme = useAppSelector(selectTheme);
+  const { capital, flag, name, population, region } = countryProps;
+  const onImgError = function (e: SyntheticEvent<HTMLImageElement>) {
+    e.currentTarget.src = '';
+  };
+
   return (
     <Link
       to="/"
       className={`${styles.card} ${styles[currentTheme]} ${className}`}
       {...props}
     >
-      <img src={countryProps.flags.svg} alt="flag" className={styles.img} />
+      <img
+        src={flag}
+        alt={`${name} flag`}
+        onError={onImgError}
+        className={styles.img}
+      />
       <div className={styles.info}>
-        <h3 className={styles.title}>{countryProps.name.common}</h3>
+        <h3 className={styles.title}>{name}</h3>
         <div>
           <div className={styles['about-item']}>
             <div className={styles['about-title']}>Region: </div>
-            <div className={styles['about-value']}>{countryProps.region}</div>
+            <div className={styles['about-value']}>{region}</div>
           </div>
           <div className={styles['about-item']}>
             <div className={styles['about-title']}>Population: </div>
-            <div className={styles['about-value']}>
-              {countryProps.population}
-            </div>
+            <div className={styles['about-value']}>{population}</div>
           </div>
           <div className={styles['about-item']}>
             <div className={styles['about-title']}>Capital: </div>
-            <div className={styles['about-value']}>{countryProps.capital}</div>
+            <div className={styles['about-value']}>{capital}</div>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import { Country } from '../../../types/country';
 import { RootReducer } from '../../../types/global';
 
 const countriesAdapter = createEntityAdapter<Country>({
-  selectId: (model) => model.name.common,
+  selectId: (model) => model.name,
 });
 
 export const fetchCountries = createAsyncThunk(
@@ -18,7 +18,15 @@ export const fetchCountries = createAsyncThunk(
     );
     const data = await res.json();
 
-    dispatch(setCountries(data));
+    dispatch(
+      setCountries(
+        data.map((country: any) => ({
+          ...country,
+          name: country.name.common,
+          flag: country.flags.svg,
+        }))
+      )
+    );
   }
 );
 
