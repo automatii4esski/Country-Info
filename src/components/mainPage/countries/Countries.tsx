@@ -12,13 +12,17 @@ import Loader from '../../UI/loader/loader/Loader';
 import Error from '../../UI/error/error/Error';
 import { useInView } from 'react-intersection-observer';
 
+const countriesCountrToRender = 12;
+
 const Countries: FC = () => {
   const dispatch = useAppDispatch();
   const countryFilters = useAppSelector(selectAllCountryFilters);
   const [ref, inView] = useInView({
     threshold: 1,
   });
-  const [renderCount, setRenderCount] = useState<number>(12);
+  const [renderCount, setRenderCount] = useState<number>(
+    countriesCountrToRender
+  );
 
   const [countries, error, isLoading] = useAppSelector(
     selectFullCountriesState
@@ -30,8 +34,12 @@ const Countries: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (inView && !isLoading) {
-      setRenderCount(renderCount + 12);
+    if (
+      inView &&
+      filteredCountries.length > countriesCountrToRender &&
+      !isLoading
+    ) {
+      setRenderCount(renderCount + countriesCountrToRender);
     }
   }, [inView]);
 
