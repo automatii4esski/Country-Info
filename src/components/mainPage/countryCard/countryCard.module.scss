@@ -71,6 +71,18 @@
   object-position: center;
 }
 
+.loader-plug {
+  height: 150px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: #000;
+}
+
 .info {
   padding: 20px;
 }

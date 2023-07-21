@@ -29,8 +29,6 @@ const Filter: FC = () => {
   };
 
   const onPopulationSet = function (min: number, max: number) {
-    console.log('dis');
-
     dispatch(
       setPopulation({
         min,
