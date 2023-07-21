@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Country } from '../types/country';
+import { Country, CountryFilter } from '../types/country';
 import { Regions } from '../types/global';
 
 export const useFilterCountriesByQuery = (
@@ -41,9 +41,7 @@ export const useFilterCountriesByPopulation = (
 
 export const useFilterCountries = function (
   countries: Country[],
-  query: string,
-  regions: Regions[],
-  population: { min: number; max: number }
+  { regions, query, population }: CountryFilter
 ) {
   const filteredByQuery = useFilterCountriesByQuery(countries, query);
   const filteredByQueryAndRegions = useFilterCountriesByRegions(
