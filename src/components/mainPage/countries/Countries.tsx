@@ -35,12 +35,21 @@ const Countries: FC = () => {
     }
   }, [inView]);
 
+  const render = function () {
+    if (isLoading) {
+      return <Loader />;
+    } else if (error) {
+      return <Error text={error} />;
+    } else {
+      return filteredCountries
+        .slice(0, renderCount)
+        .map((country, i) => <CountryCard key={i} countryProps={country} />);
+    }
+  };
+
   return (
     <div className={styles.countries}>
-      {/* {true && <Error text={error} />} */}
-      {filteredCountries.slice(0, renderCount).map((country, i) => (
-        <CountryCard key={i} countryProps={country} />
-      ))}
+      {render()}
       <div ref={ref} className={styles['observer-trigger']}></div>
     </div>
   );

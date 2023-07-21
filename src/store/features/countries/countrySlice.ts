@@ -15,7 +15,7 @@ export const fetchCountries = createAsyncThunk(
   'countries/fetchCountries',
   async (_, { dispatch }) => {
     const res = await fetch(
-      'https://restcountris.com/v3.1/all?fields=name,population,flags,capital,region'
+      'https://restcountries.com/v3.1/all?fields=name,population,flags,capital,region'
     );
     const data = await res.json();
 
@@ -69,10 +69,8 @@ const countrySlice = createSlice({
       .addMatcher(
         (action) => action.type.endsWith('/rejected'),
         (state, action) => {
-          console.log(action);
-
           state.isLoading = false;
-          state.error = 'Error';
+          state.error = action.error.message;
         }
       );
   },
