@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent, KeyboardEvent } from 'react';
 import styles from './rangeInput.module.scss';
 import { useAppSelector } from '../../../../hooks/redux';
 import { selectTheme } from '../../../../store/features/theme/themeSlice';
@@ -54,6 +54,12 @@ const RangeInput: FC<RangeInputProps> = ({
     }
   };
 
+  const onNumberInputKeyPress = function (e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key === 'Enter') {
+      (e.target as HTMLInputElement).blur();
+    }
+  };
+
   const setValues = () => onSetValuesCallback(minValue, maxValue);
 
   return (
@@ -93,6 +99,7 @@ const RangeInput: FC<RangeInputProps> = ({
           <Input
             onChange={onMinRangeChange}
             onBlur={setValues}
+            onKeyDown={onNumberInputKeyPress}
             value={minValue}
             max={maxLimit}
             min={minLimit}
@@ -105,6 +112,7 @@ const RangeInput: FC<RangeInputProps> = ({
           <Input
             onChange={onMaxRangeChange}
             onBlur={setValues}
+            onKeyDown={onNumberInputKeyPress}
             value={maxValue}
             max={maxLimit}
             min={minLimit}
