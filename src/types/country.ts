@@ -7,6 +7,7 @@ export interface Country {
   capital: string;
   name: string;
   region: string;
+  alpha: string;
 }
 
 export interface CountryCardProps extends Omit<LinkProps, 'to'> {
@@ -19,5 +20,18 @@ export interface CountryFilter {
   population: {
     min: number;
     max: number;
+  };
+}
+
+export interface SingleCountry {
+  flag: string;
+  borders: string[];
+  info: {
+    currencies: string;
+    languages: string;
+    population: number;
+    capital: string;
+    name: string;
+    region: string;
   };
 }

@@ -12,7 +12,7 @@ const CountryCard: FC<CountryCardProps> = ({
   ...props
 }) => {
   const currentTheme = useAppSelector(selectTheme);
-  const { capital, flag, name, population, region } = countryProps;
+  const { capital, flag, name, alpha, population, region } = countryProps;
   const onImgError = function (e: SyntheticEvent<HTMLImageElement>) {
     e.currentTarget.src = '';
   };
@@ -28,7 +28,7 @@ const CountryCard: FC<CountryCardProps> = ({
 
   return (
     <Link
-      to="/"
+      to={`/country/${alpha}`}
       className={`${styles.card} ${styles[currentTheme]} ${className}`}
       {...props}
     >

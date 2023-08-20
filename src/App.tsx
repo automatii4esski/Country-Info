@@ -5,6 +5,7 @@ import Header from './components/header/Header';
 import { useAppSelector } from './hooks/redux';
 import { selectTheme } from './store/features/theme/themeSlice';
 import MainPage from './pages/mainPage/MainPage';
+import CountryPage from './pages/countryPage/CountryPage';
 
 function App() {
   const currentTheme = useAppSelector(selectTheme);
@@ -18,6 +19,7 @@ function App() {
       <Header />
       <Routes>
         <Route index element={<MainPage />}></Route>
+        <Route path="country/:name" element={<CountryPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

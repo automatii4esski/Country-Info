@@ -1,0 +1,103 @@
+@use '../../scss/vars.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.img-wrapper {
+  max-width: 500px;
+  width: 100%;
+  margin-right: 50px;
+  max-height: 300px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.info {
+  flex: 1 1 auto;
+}
+
+.light {
+  .title::before {
+    background: vars.$light-tertiary;
+  }
+
+  .border {
+    border-color: vars.$light-tertiary;
+    background: vars.$light-secondary;
+
+    &:hover {
+      border-color: vars.$dark-primary;
+    }
+  }
+}
+
+.dark {
+  .title::before {
+    background: vars.$dark-tertiary;
+  }
+
+  .border {
+    border-color: vars.$dark-tertiary;
+    background: vars.$dark-secondary;
+
+    &:hover {
+      border-color: vars.$light-primary;
+    }
+  }
+}
+
+.title {
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 28px;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 40px;
+  }
+}
+
+.list {
+  margin-bottom: 40px;
+}
+
+.item + .item {
+  margin-top: 5px;
+}
+
+.item {
+  display: flex;
+  font-size: 18px;
+}
+
+.item-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 10px;
+  text-transform: capitalize;
+}
+
+.borders {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.border {
+  padding: 5px 10px;
+  border: 2px solid;
+  transition: border-color 0.15s;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}

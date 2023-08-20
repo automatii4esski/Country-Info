@@ -15,19 +15,18 @@ export const fetchCountries = createAsyncThunk(
   'countries/fetchCountries',
   async (_, { dispatch }) => {
     const res = await fetch(
-      'https://restcountries.com/v3.1/all?fields=name,population,flags,capital,region'
+      'https://restcountries.com/v3.1/all?fields=name,population,flags,capital,region,cca2'
     );
     const data = await res.json();
 
-    dispatch(
-      setCountries(
-        data.map((country: any) => ({
-          ...country,
-          name: country.name.common,
-          flag: country.flags.svg,
-        }))
-      )
-    );
+    const unpackedData: Country[] = data.map((country: any) => ({
+      ...country,
+      alpha: country.cca2,
+      name: country.name.common,
+      flag: country.flags.svg,
+    }));
+
+    dispatch(setCountries(unpackedData));
   }
 );
 
@@ -37,14 +36,6 @@ const countrySlice = createSlice({
     setCountries(state, action) {
       countriesAdapter.setAll(state, action.payload);
     },
-    // setLoader(state, action) {
-    //   state.isLoading = action.payload;
-    //   return state;
-    // },
-    // setError(state, action) {
-    //   state.error = action.payload;
-    //   return state;
-    // },
   },
   initialState: countriesAdapter.getInitialState({
     isLoading: false,
