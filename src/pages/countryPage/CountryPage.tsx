@@ -8,6 +8,7 @@ import { useAppSelector } from '../../hooks/redux';
 import { selectTheme } from '../../store/features/theme/themeSlice';
 import Loader from '../../components/UI/loader/loader/Loader';
 import Error from '../../components/UI/error/error/Error';
+import { CountryAPI } from '../../api/countryAPI';
 
 const initValue: SingleCountry = {
   borders: [],
@@ -33,9 +34,7 @@ const CountryPage: FC = () => {
   };
 
   const [fetchCountry, isLoading, error] = useFetch(async () => {
-    const res = await fetch(
-      `https://restcountries.com/v3.1/alpha/${params.name}?fields=name,population,flags,capital,region,borders,languages,currencies`
-    );
+    const res = await fetch(CountryAPI.getSingleCountryURL(params.name!));
 
     const { borders, flags, ...otherData } = await res.json();
     const unpackedData: SingleCountry = {

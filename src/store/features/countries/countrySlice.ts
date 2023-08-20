@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Country } from '../../../types/country';
 import { RootReducer } from '../../../types/global';
+import { CountryAPI } from '../../../api/countryAPI';
 
 const countriesAdapter = createEntityAdapter<Country>({
   selectId: (model) => model.name,
@@ -14,9 +15,7 @@ const countriesAdapter = createEntityAdapter<Country>({
 export const fetchCountries = createAsyncThunk(
   'countries/fetchCountries',
   async (_, { dispatch }) => {
-    const res = await fetch(
-      'https://restcountries.com/v3.1/all?fields=name,population,flags,capital,region,cca2'
-    );
+    const res = await fetch(CountryAPI.getAllCountryiesURL());
     const data = await res.json();
 
     const unpackedData: Country[] = data.map((country: any) => ({
