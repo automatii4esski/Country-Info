@@ -16,24 +16,27 @@ const Select = <
   const currentTheme = useAppSelector(selectTheme);
 
   return (
-    <ReactSelect
-      {...props}
-      classNames={{
-        control: (state) => {
-          return `${styles.select} ${
-            styles[state.isFocused ? 'focused' : '']
-          } ${styles[`select-${currentTheme}`]}`;
-        },
-        option: () => `${styles[`option-${currentTheme}`]} ${styles.option}`,
-        menu: () => styles.menu,
-        multiValue: () => `${styles[`value-${currentTheme}`]} ${styles.value}`,
-        indicatorsContainer: () => styles.button,
-        multiValueRemove: () => styles.button,
-      }}
-      unstyled
-      isClearable
-      isSearchable={false}
-    />
+    <div className={className}>
+      <ReactSelect
+        {...props}
+        classNames={{
+          control: (state) => {
+            return `${styles.select} ${
+              styles[state.isFocused ? 'focused' : '']
+            } ${styles[`select-${currentTheme}`]}`;
+          },
+          option: () => `${styles[`option-${currentTheme}`]} ${styles.option}`,
+          menu: () => styles.menu,
+          multiValue: () =>
+            `${styles[`value-${currentTheme}`]} ${styles.value}`,
+          indicatorsContainer: () => styles.button,
+          multiValueRemove: () => styles.button,
+        }}
+        unstyled
+        isClearable
+        isSearchable={false}
+      />
+    </div>
   );
 };
 

@@ -113,3 +113,35 @@
 .no-border-message {
   font-size: 18px;
 }
+
+@media (max-width: 730px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .img-wrapper {
+    margin-right: 0;
+    max-height: fit-content;
+    margin-bottom: 20px;
+  }
+  .borders {
+    justify-content: center;
+  }
+
+  .border {
+    margin: 3px;
+  }
+
+  .flag-loader {
+    transform: none;
+    position: static;
+  }
+}

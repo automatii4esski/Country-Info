@@ -49,6 +49,7 @@ const Filter: FC = () => {
         onChange={onSearchChange}
         defaultValue={query}
         placeholder="Search for a country"
+        className={styles['filter-search']}
       />
       <RangeInput
         onSetValues={onPopulationSet}
@@ -57,6 +58,7 @@ const Filter: FC = () => {
         maxLimit={1500000000}
         max={population.max}
         min={population.min}
+        className={styles['filter-range']}
       />
       <Select
         placeholder="Select the region"
@@ -66,6 +68,7 @@ const Filter: FC = () => {
           label: reg,
           value: reg,
         }))}
+        className={styles['filter-select']}
         options={regionsOptions}
       />
     </div>
