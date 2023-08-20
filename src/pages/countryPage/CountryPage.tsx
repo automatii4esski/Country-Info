@@ -26,6 +26,12 @@ const CountryPage: FC = () => {
   const params = useParams();
   const currentTheme = useAppSelector(selectTheme);
   const [countryData, setCountryData] = useState<SingleCountry>(initValue);
+  const [isCountryFlagImgLoading, setIsCountryFlagImgLoading] =
+    useState<boolean>(true);
+  const onClountryFlagImgLoad = function () {
+    setIsCountryFlagImgLoading(false);
+  };
+
   const [fetchCountry, isLoading, error] = useFetch(async () => {
     const res = await fetch(
       `https://restcountries.com/v3.1/alpha/${params.name}?fields=name,population,flags,capital,region,borders,languages,currencies`
@@ -50,7 +56,28 @@ const CountryPage: FC = () => {
 
   useEffect(() => {
     fetchCountry();
+    setIsCountryFlagImgLoading(true);
   }, [params.name]);
+
+  const renderBorders = function () {
+    if (countryData.borders.length !== 0) {
+      return (
+        <>
+          {countryData.borders.map((border, i) => (
+            <Link key={i} to={`/country/${border}`} className={styles.border}>
+              {border}
+            </Link>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <>
+          <p className={styles['no-border-message']}>No borders</p>
+        </>
+      );
+    }
+  };
 
   const render = function () {
     if (isLoading) {
@@ -61,7 +88,15 @@ const CountryPage: FC = () => {
       return (
         <>
           <div className={styles['img-wrapper']}>
-            <img className={styles.img} src={countryData.flag} alt="" />
+            <img
+              className={styles.img}
+              onLoad={onClountryFlagImgLoad}
+              src={countryData.flag}
+              alt=""
+            />
+            {isCountryFlagImgLoading && (
+              <Loader className={styles['flag-loader']} />
+            )}
           </div>
           <div className={styles.info}>
             <h2 className={styles.title}>Info</h2>
@@ -76,17 +111,7 @@ const CountryPage: FC = () => {
               ))}
             </ul>
             <h2 className={styles.title}>Borders</h2>
-            <div className={styles.borders}>
-              {countryData.borders.map((border, i) => (
-                <Link
-                  key={i}
-                  to={`/country/${border}`}
-                  className={styles.border}
-                >
-                  {border}
-                </Link>
-              ))}
-            </div>
+            <div className={styles.borders}>{renderBorders()}</div>
           </div>
         </>
       );
