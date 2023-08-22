@@ -4,10 +4,10 @@ Country Info - a web page where you can find information about any country: its 
 
 ## **STACK**
 
--Typescript
--React
--Redux (RTK)
--SCSS
+- Typescript
+- React
+- Redux (RTK)
+- SCSS
 
 ## **COMMANDS**
 
